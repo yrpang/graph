@@ -36,5 +36,11 @@ class Api {
   createGraph(params) {
     return axiosIns.post('/graph_user/create', params)
   }
+  uploadRelation(params) {
+    return axiosIns.post('/graph_operate/upload_relation', params)
+  }
+  uploadAttribute(params) {
+    return axiosIns.post('/graph_operate/upload_attribute', params)
+  }
 }
 export default new Api()
