@@ -1,4 +1,3 @@
-import './App.css'
 import Index from './pages/Index'
 import Home from './pages/Home'
 import 'antd/dist/antd.css'
