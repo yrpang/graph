@@ -79,15 +79,17 @@ export default function Home() {
         {menu.map((item) => (
           <Menu.Item key={item.id}>{item.graphName}</Menu.Item>
         ))}
-        <div
-          onClick={() => {
-            setModalVisible(true)
-          }}
-          style={{ position: 'absolute', bottom: 30, left: 20 }}
-        >
-          <SettingFilled style={{ fontSize: 20 }} />
-        </div>
       </Menu>
+
+      {/* 浮动小组件 */}
+      <div
+        onClick={() => {
+          setModalVisible(true)
+        }}
+        style={{ position: 'absolute', bottom: 30, left: 20 }}
+      >
+        <SettingFilled style={{ fontSize: 20 }} />
+      </div>
       <div
         style={{ position: 'absolute', right: 30, top: 30 }}
         onClick={() => {
@@ -165,7 +167,7 @@ export default function Home() {
           <Form.Item name='graphUserID' style={{ width: 200 }}>
             <Select>
               {menu.map((item) => (
-                <Option value={item.id}>{item.graphName}</Option>
+                <Option value={item.id} key={item.id}>{item.graphName}</Option>
               ))}
             </Select>
           </Form.Item>
