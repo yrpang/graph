@@ -39,5 +39,11 @@ class Api {
   getGraphData(id) {
     return axiosIns.get('/graph_app/entire_graph?graphID='+id)
   }
+  uploadRelation(params) {
+    return axiosIns.post('/graph_operate/upload_relation', params)
+  }
+  uploadAttribute(params) {
+    return axiosIns.post('/graph_operate/upload_attribute', params)
+  }
 }
 export default new Api()
