@@ -20,7 +20,7 @@ const routeConfig = [
 function FrontedAuth() {
   const location = useLocation()
   const result = routeConfig.find((item) => item.path === location.pathname)
-  const isLogin = localStorage.getItem('user_info') ? true : false
+  const isLogin = sessionStorage.getItem('user_info') ? true : false
   if (result && (!result.auth || (result.auth && isLogin))) {
     return isLogin ? (
       <>

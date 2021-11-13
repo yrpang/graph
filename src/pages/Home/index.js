@@ -18,7 +18,7 @@ export default function Home() {
     formData.append('graphID', graphId)
     formData.append('relationFile', fileList[0], fileList[0].name)
     const res = await Api.uploadRelation(formData)
-    if (res.code === 200100) {
+    if (res?.code === 200100) {
       message.success('上传成功')
       setFileList([])
     }
@@ -28,7 +28,7 @@ export default function Home() {
     formData.append('graphID', graphId)
     formData.append('attributeFile', fileList2[0], fileList2[0].name)
     const res = await Api.uploadAttribute(formData)
-    if (res.code === 200100) {
+    if (res?.code === 200100) {
       message.success('上传成功')
       setFileList2([])
     }
@@ -45,8 +45,8 @@ export default function Home() {
       data.append(key, value)
     })
     const res = await Api.createGraph(data)
-    if (res.code === 200100) {
-      message.success('图表删除成功')
+    if (res?.code === 200100) {
+      message.success('图表添加成功')
       addForm.resetFields()
       await getGraph()
     }
@@ -59,8 +59,8 @@ export default function Home() {
       data.append(key, Number(value))
     })
     const res = await Api.deleteGraph(data)
-    if (res.code === 200100) {
-      message.success('图表添加成功')
+    if (res?.code === 200100) {
+      message.success('图表删除成功')
       deleteForm.resetFields()
       await getGraph()
     }
