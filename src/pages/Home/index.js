@@ -2,7 +2,7 @@ import { Form, Input, Button, Checkbox, message, Menu, Modal, Select, Upload } f
 import Api from '../../api'
 import { useEffect, useState } from 'react'
 import { SettingFilled, UploadOutlined } from '@ant-design/icons'
-import Graph from '../../components/Graph'
+import Graph from '../../components/Graph/index'
 import './style.css'
 
 const { Option } = Select
