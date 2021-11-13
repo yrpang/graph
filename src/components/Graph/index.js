@@ -8,6 +8,61 @@ import MyToolbar from './MyToolbar'
 import Tooltips from './Tooltips'
 import processData from './utils'
 
+const mockData = {
+    nodes: [
+        {
+            id: '4',
+            display_name: 'A',
+            name: '节点A',
+            value: 5,
+            weight: 73.355
+        },
+        {
+            id: '5',
+            display_name: 'B',
+            name: '节点B',
+            value: 3,
+            weight: 73.355
+        },
+        {
+            id: '6',
+            display_name: 'C',
+            name: '节点C',
+            value: 3,
+            weight: 73.355
+        },
+        {
+            id: '7',
+            display_name: 'D',
+            name: '节点D',
+            value: 3,
+            weight: 73.355
+        }
+    ],
+    edges: [
+        {
+            fromID: '4',
+            toID: '5',
+            name: 'something'
+        },
+        {
+            fromID: '4',
+            toID: '6',
+            name: 'something'
+        },
+        {
+            fromID: '5',
+            toID: '6',
+            name: 'something'
+        },
+        {
+            fromID: '4',
+            toID: '7',
+            name: 'something'
+        }
+    ]
+};
+
 const { DragCanvas, ZoomCanvas, DragNode, ActivateRelations } = Behaviors;
 
 const defaultNode = {
@@ -51,6 +106,10 @@ class Graph extends React.Component {
                 graphData: graphData
             })
         })
+        // this.setState({
+        //     ifOK: true,
+        //     graphData: processData(mockData),
+        // })
     }
 
     render() {
@@ -62,7 +121,7 @@ class Graph extends React.Component {
                     <DragNode />
                     <ActivateRelations trigger="click" />
                     <HideEdge />
-                    <MyMenu />
+                    <MyMenu state={this.state} updateState={this.setState.bind(this)} />
                     <MyToolbar />
                     <Tooltips />
                 </Graphin>
