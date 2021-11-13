@@ -36,5 +36,8 @@ class Api {
   createGraph(params) {
     return axiosIns.post('/graph_user/create', params)
   }
+  getGraphData(id) {
+    return axiosIns.get('/graph_app/entire_graph?graphID='+id)
+  }
 }
 export default new Api()
