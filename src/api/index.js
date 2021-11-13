@@ -14,7 +14,6 @@ const axiosIns = (() => {
 })()
 
 axiosIns.interceptors.response.use((res) => {
-  console.log(res)
   return res.data
 })
 class Api {

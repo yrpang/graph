@@ -2,6 +2,8 @@ import { Form, Input, Button, Checkbox, message, Menu, Modal, Select, Upload } f
 import Api from '../../api'
 import { useEffect, useState } from 'react'
 import { SettingFilled, UploadOutlined } from '@ant-design/icons'
+import Graph from '../../components/Graph'
+import './style.css'
 
 const { Option } = Select
 export default function Home() {
@@ -70,16 +72,24 @@ export default function Home() {
   }, [modalVisible])
   return (
     <div>
-      <Menu
-        style={{ width: 256, height: '100vh' }}
-        onClick={(e) => {
-          setGraphId(e.key)
-        }}
-      >
-        {menu.map((item) => (
-          <Menu.Item key={item.id}>{item.graphName}</Menu.Item>
-        ))}
-      </Menu>
+      <div className="container">
+        <div>
+          <Menu
+            style={{ width: 256, height: '100vh' }}
+            onClick={(e) => {
+              setGraphId(e.key)
+            }}
+          >
+            {menu.map((item) => (
+              <Menu.Item key={item.id}>{item.graphName}</Menu.Item>
+            ))}
+          </Menu>
+        </div>
+        <div className="graph">
+          <Graph></Graph>
+        </div>
+      </div>
+
 
       {/* 浮动小组件 */}
       <div
