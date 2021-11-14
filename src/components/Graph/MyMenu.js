@@ -20,7 +20,7 @@ export default function MyMenu(probs) {
             console.log(data)
         }
         const id = data.id;
-        let one_degree = graph.getNeighbors(data.id);
+        let one_degree = graph.getNeighbors(data.id, "target");
         let newData = {
             nodes: [],
             edges: []
@@ -28,9 +28,10 @@ export default function MyMenu(probs) {
 
         one_degree.map(n1 => {
             const id1 = n1.getID();
-            let two_degree = graph.getNeighbors(id1);
+            let two_degree = graph.getNeighbors(id1, "target");
             two_degree.map(n2 => {
                 const id2 = n2.getID();
+                if(id2===id) return null
                 const name = n2.getModel().style.label.value
                 const newNID = `${id}-${id2}`;
                 newData.nodes.push({
