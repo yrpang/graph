@@ -89,23 +89,32 @@ const layout = {
 
 
 class Graph extends React.Component {
-    constructor(probs) {
-        super(probs);
+    constructor(props) {
+        super(props);
         this.state = {
             graphData: null,
-            ifOK: false
+            ifOK: false,
+            ifInitial: true
         }
     }
-
-    componentDidMount() {
-        api.getGraphData(10).then(res => {
-            console.log(res.data)
-            let graphData = processData(res.data);
+    componentDidUpdate(prevProps) {
+        if (this.props.id !== prevProps.id) {
             this.setState({
-                ifOK: true,
-                graphData: graphData
+                ifInitial: false,
+                ifOK: false,
+                graphData: null
             })
-        })
+            api.getGraphData(this.props.id).then(res => {
+                console.log(this.props.id)
+                console.log(res.data)
+                let graphData = processData(res.data);
+                this.setState({
+                    ifInitial: false,
+                    ifOK: true,
+                    graphData: graphData
+                })
+            })
+        }
         // this.setState({
         //     ifOK: true,
         //     graphData: processData(mockData),
@@ -113,7 +122,7 @@ class Graph extends React.Component {
     }
 
     render() {
-        if (this.state.ifOK) {
+        if (this.state.ifOK && !this.state.ifInitial) {
             return (
                 <Graphin data={this.state.graphData} layout={layout} defaultNode={defaultNode} fitView="true">
                     <ZoomCanvas disabled />
@@ -126,8 +135,10 @@ class Graph extends React.Component {
                     <Tooltips />
                 </Graphin>
             )
-        } else {
+        } else if (!this.state.ifInitial) {
             return <div>数据正在加载请稍后...</div>
+        } else {
+            return <div>请选择要展示的图</div>
         }
 
     }

@@ -86,7 +86,7 @@ export default function Home() {
           </Menu>
         </div>
         <div className="graph">
-          <Graph></Graph>
+          <Graph id={graphId}></Graph>
         </div>
       </div>
 
