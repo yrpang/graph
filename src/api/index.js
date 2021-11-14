@@ -1,6 +1,6 @@
 import axios from 'axios'
 const isDev = process.env.NODE_ENV === 'development'
-const baseURL = isDev ? '/api' : 'http://112.124.28.134:8080'
+const baseURL = isDev ? '/api' : 'https://api.lnception.cn'
 const getAxiosIns = () => {
   const userInfoStr = sessionStorage.getItem('user_info')
   const userInfoObj = JSON.parse(userInfoStr)

@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     '/api',
     createProxyMiddleware({
-      target: 'http://112.124.28.134:8080',
+      target: 'https://api.lnception.cn',
       changeOrigin: true,
       pathRewrite: {
         '/api': '',
