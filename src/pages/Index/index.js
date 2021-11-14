@@ -19,11 +19,31 @@ export default function Index() {
       }
     })
     const res = await Api.register(data)
-    if (res.code === 200100) {
+    if (res?.code === 200100) {
       message.success('注册成功!')
+      Api.saveUserInfo(value)
       history.push('/home')
-    } else if (res.code === 500110) {
+    } else if (res?.code === 500110) {
       message.warning('该用户名已存在！')
+    }
+  }
+  const handleLogin = async () => {
+    await form.validateFields()
+    const value = form.getFieldsValue()
+    Object.entries(value).forEach(([key, value]) => {
+      if (/[\u4e00-\u9fa5]/.test(value)) {
+        message.error('用户名和密码不能包含中文')
+        return
+      }
+    })
+
+    const res = await Api.login(value)
+    if (res?.code === 200100) {
+      message.success('登录成功!')
+      Api.saveUserInfo(value)
+      history.push('/home')
+    } else {
+      message.error('用户名或密码错误！')
     }
   }
   return (
@@ -41,6 +61,9 @@ export default function Index() {
           <ButtonGroup>
             <Button type='primary' style={{ marginRight: 20 }} htmlType='submit' onClick={handleRegister}>
               注册
+            </Button>
+            <Button style={{ marginRight: 20, background: '#987' }} htmlType='submit' onClick={handleLogin}>
+              登录
             </Button>
           </ButtonGroup>
         </Form.Item>
