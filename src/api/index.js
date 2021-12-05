@@ -1,6 +1,6 @@
 import axios from 'axios'
 const isDev = process.env.NODE_ENV === 'development'
-const baseURL = isDev ? '/api' : 'http://112.124.28.134:8080'
+const baseURL = isDev ? '/api' : 'https://api.lnception.cn'
 const getAxiosIns = () => {
   const userInfoStr = sessionStorage.getItem('user_info')
   const userInfoObj = JSON.parse(userInfoStr)
@@ -65,6 +65,9 @@ class Api {
   }
   createGraph(params) {
     return this.axiosIns.post('/graph_user/create', params)
+  }
+  getGraphData(id) {
+    return this.axiosIns.get('/graph_app/entire_graph?graphID='+id)
   }
   uploadRelation(params) {
     return this.axiosIns.post('/graph_operate/upload_relation', params)

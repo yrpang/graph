@@ -2,6 +2,8 @@ import { Form, Input, Button, Checkbox, message, Menu, Modal, Select, Upload } f
 import Api from '../../api'
 import { useEffect, useState } from 'react'
 import { SettingFilled, UploadOutlined } from '@ant-design/icons'
+import Graph from '../../components/Graph/index'
+import './style.css'
 
 const { Option } = Select
 export default function Home() {
@@ -70,24 +72,34 @@ export default function Home() {
   }, [modalVisible])
   return (
     <div>
-      <Menu
-        style={{ width: 256, height: '100vh' }}
-        onClick={(e) => {
-          setGraphId(e.key)
-        }}
-      >
-        {menu.map((item) => (
-          <Menu.Item key={item.id}>{item.graphName}</Menu.Item>
-        ))}
-        <div
-          onClick={() => {
-            setModalVisible(true)
-          }}
-          style={{ position: 'absolute', bottom: 30, left: 20 }}
-        >
-          <SettingFilled style={{ fontSize: 20 }} />
+      <div className="container">
+        <div>
+          <Menu
+            style={{ width: 256, height: '100vh' }}
+            onClick={(e) => {
+              setGraphId(e.key)
+            }}
+          >
+            {menu.map((item) => (
+              <Menu.Item key={item.id}>{item.graphName}</Menu.Item>
+            ))}
+          </Menu>
         </div>
-      </Menu>
+        <div className="graph">
+          <Graph id={graphId}></Graph>
+        </div>
+      </div>
+
+
+      {/* 浮动小组件 */}
+      <div
+        onClick={() => {
+          setModalVisible(true)
+        }}
+        style={{ position: 'absolute', bottom: 30, left: 20 }}
+      >
+        <SettingFilled style={{ fontSize: 20 }} />
+      </div>
       <div
         style={{ position: 'absolute', right: 30, top: 30 }}
         onClick={() => {
@@ -165,7 +177,7 @@ export default function Home() {
           <Form.Item name='graphUserID' style={{ width: 200 }}>
             <Select>
               {menu.map((item) => (
-                <Option value={item.id}>{item.graphName}</Option>
+                <Option value={item.id} key={item.id}>{item.graphName}</Option>
               ))}
             </Select>
           </Form.Item>
