@@ -1,5 +1,6 @@
 import Index from './pages/Index'
 import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
 import 'antd/dist/antd.css'
 import { BrowserRouter as Router, Switch, Route, Redirect, useLocation } from 'react-router-dom'
 
@@ -14,6 +15,11 @@ const routeConfig = [
     component: Home,
     auth: true,
   },
+  {
+    path: '/dashboard',
+    component: Dashboard,
+    auth: true,
+  },
 ]
 
 function FrontedAuth() {
@@ -23,8 +29,9 @@ function FrontedAuth() {
   if (result && (!result.auth || (result.auth && isLogin))) {
     return isLogin ? (
       <>
-        <Redirect to='/home'></Redirect>
-        <Route component={Home}></Route>
+        <Route component={result.component} pathname={result.path}></Route>
+        {/* <Redirect to='/home'></Redirect> */}
+        {/* <Route component={Home}></Route> */}
       </>
     ) : (
       <Route component={result.component} pathname={result.path}></Route>

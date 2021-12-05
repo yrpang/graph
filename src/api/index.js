@@ -67,13 +67,39 @@ class Api {
     return this.axiosIns.post('/graph_user/create', params)
   }
   getGraphData(id) {
-    return this.axiosIns.get('/graph_app/entire_graph?graphID='+id)
+    return this.axiosIns.get('/graph_app/entire_graph?graphID=' + id)
   }
   uploadRelation(params) {
     return this.axiosIns.post('/graph_operate/upload_relation', params)
   }
   uploadAttribute(params) {
     return this.axiosIns.post('/graph_operate/upload_attribute', params)
+  }
+  getNodeList(params) {
+    return this.axiosIns.get('/graph_app/nodes', {
+      params: {
+        graphID: params,
+      },
+    })
+  }
+  createNode(params) {
+    return this.axiosIns.post('/graph_operate/add_node', params)
+  }
+  deleteNode(params) {
+    return this.axiosIns.post('/graph_operate/delete_node', params)
+  }
+  getRelativeList(params) {
+    return this.axiosIns.get('/graph_app/edges', {
+      params: {
+        graphID: params,
+      },
+    })
+  }
+  createRelative(params) {
+    return this.axiosIns.post('/graph_operate/add_edge', params)
+  }
+  deleteRelative(params) {
+    return this.axiosIns.post('/graph_operate/delete_edge', params)
   }
 }
 export default new Api()
