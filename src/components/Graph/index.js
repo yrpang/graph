@@ -76,15 +76,15 @@ const defaultNode = {
 };
 
 const layout = {
-    type: 'concentric',
-    // type: 'graphin-force',
-    // animation: true,
-    // preset: {
-    //     type: 'concentric', // 力导的前置布局
-    // },
-    // leafCluster: true, // 是否需要叶子节点聚类
-    // nodeClusterBy: 'cluster', // 节点聚类的映射字段
-    // clusterNodeStrength: 20, // 节点聚类作用力
+    // type: 'concentric',
+    type: 'graphin-force',
+    animation: true,
+    preset: {
+        type: 'concentric', // 力导的前置布局
+    },
+    leafCluster: true, // 是否需要叶子节点聚类
+    nodeClusterBy: 'cluster', // 节点聚类的映射字段
+    clusterNodeStrength: 10, // 节点聚类作用力
 };
 
 
@@ -125,7 +125,7 @@ class Graph extends React.Component {
         if (this.state.ifOK && !this.state.ifInitial) {
             return (
                 <Graphin data={this.state.graphData} layout={layout} defaultNode={defaultNode} fitView="true">
-                    <ZoomCanvas disabled />
+                    <ZoomCanvas/>
                     <DragCanvas />
                     <DragNode />
                     <ActivateRelations trigger="click" />
