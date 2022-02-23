@@ -75,10 +75,20 @@ const defaultNode = {
     },
 };
 
+const defaultEdge = {
+    style: {
+        keyshape: {
+        },
+        label: {
+            fill: 'black',
+          },
+    },
+}
+
 const layout = {
     // type: 'concentric',
     type: 'graphin-force',
-    animation: true,
+    animation: false,
     preset: {
         type: 'concentric', // 力导的前置布局
     },
@@ -124,15 +134,15 @@ class Graph extends React.Component {
     render() {
         if (this.state.ifOK && !this.state.ifInitial) {
             return (
-                <Graphin data={this.state.graphData} layout={layout} defaultNode={defaultNode} fitView="true">
+                <Graphin data={this.state.graphData} layout={layout} defaultNode={defaultNode} defaultEdge={defaultEdge} fitView="true">
                     <ZoomCanvas/>
                     <DragCanvas />
                     <DragNode />
                     <ActivateRelations trigger="click" />
                     <HideEdge />
                     <MyMenu state={this.state} updateState={this.setState.bind(this)} />
-                    <MyToolbar />
-                    <Tooltips />
+                    <MyToolbar/>
+                    {/* <Tooltips /> */}
                 </Graphin>
             )
         } else if (!this.state.ifInitial) {

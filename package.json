@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.7.0",
-    "@antv/graphin": "^2.4.3",
+    "@antv/graphin": "^2.4.15",
     "@antv/graphin-components": "^2.4.0",
     "@antv/graphin-icons": "^1.0.0",
     "@testing-library/jest-dom": "^5.11.4",
