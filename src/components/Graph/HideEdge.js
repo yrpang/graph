@@ -3,7 +3,7 @@ import { GraphinContext } from '@antv/graphin';
 
 const HideEdge = () => {
     const { graph, apis } = useContext(GraphinContext);
-    
+
     useEffect(() => {
         const handleClick = (evt) => {
             const node = evt.item;
@@ -27,7 +27,9 @@ const HideEdge = () => {
         const cancelClick = (evt) => {
             const edges = graph.getEdges();
             edges.map(e => {
-                e.show()
+                if (!e.hasState('hideByUser')) {
+                    e.show()
+                }
                 return null
             })
         }

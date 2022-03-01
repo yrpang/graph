@@ -19,12 +19,13 @@ const menuOptions = [
 export default function MyMenu(probs) {
     const { state, updateState } = probs;
     const { graph, apis } = useContext(GraphinContext);
+    const oldData = graph.save();
     const handleMenu = (opt, data) => {
         if (opt.key === '2-degree') {
             console.log(data)
 
             const id = data.id;
-            let one_degree = graph.getNeighbors(data.id, "target");
+            let one_degree = graph.getNeighbors(data.id, "target").filter(n => !n.hasState('hideByUser'));
             let newData = {
                 nodes: [],
                 edges: []
@@ -32,7 +33,7 @@ export default function MyMenu(probs) {
 
             one_degree.map(n1 => {
                 const id1 = n1.getID();
-                let two_degree = graph.getNeighbors(id1, "target");
+                let two_degree = graph.getNeighbors(id1, "target").filter(n => !n.hasState('hideByUser'));
                 two_degree.map(n2 => {
                     const id2 = n2.getID();
                     if (id2 === id) return null
@@ -80,7 +81,24 @@ export default function MyMenu(probs) {
             })
         } else if (opt.key === 'hide') {
             const id = data.id;
-            graph.removeItem(id);
+            const node = graph.findById(id);
+            graph.hideItem(node);
+
+            const neighbers = graph.getNeighbors(id).filter(n => !n.hasState('hideByUser'))
+            for (const n of neighbers) {
+                console.log(n);
+                const degree = n.getEdges().filter(i => !i.hasState('hideByUser')).length;
+                if (degree === 1) {
+                    graph.hideItem(n);
+                    n.setState('hideByUser', true);
+                    const edges = n.getEdges();
+                    for (const e of edges) {
+                        e.setState('hideByUser', true);
+                    }
+                }
+            }
+            node.setState('hideByUser', true);
+            node.getEdges().map(e => e.setState('hideByUser', true));
         }
     }
 

@@ -88,7 +88,7 @@ const defaultEdge = {
 const layout = {
     // type: 'concentric',
     type: 'graphin-force',
-    animation: false,
+    animation: true,
     preset: {
         type: 'concentric', // 力导的前置布局
     },
