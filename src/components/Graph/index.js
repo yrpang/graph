@@ -115,8 +115,6 @@ class Graph extends React.Component {
                 graphData: null
             })
             api.getGraphData(this.props.id).then(res => {
-                console.log(this.props.id)
-                console.log(res.data)
                 let graphData = processData(res.data);
                 this.setState({
                     ifInitial: false,
